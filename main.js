@@ -1,11 +1,15 @@
 var arrPrize = [];
 var arrMember = [];
 var res = [];
+var oneWin;
+
 function handleClick(typeGen) {
     if (typeGen.value == 1) {
+        oneWin = 0;
         showTables();
     } else {
-        alert('Value: 2 - ' + typeGen.value);
+        oneWin = 1;
+        showTables();
     }
     ;
 }
@@ -27,10 +31,13 @@ function showTables() {
     for (i = 0; i < arrPrize.length; i++) {
         str += '<tr><td colspan=\"2\">' + arrPrize[i] + '</td></tr>';
     }
-    if (res.length == 0) {
+    alert[oneWin];
+    if (oneWin !== 1 || res.length == 0) {
         str += '<tr><td><input type="button" onclick="onClickPrize()" value="+"></td><td><input type="text" id="prizeId" name="prize"></td></tr>';
     }
-    
+
+
+
     str += '</table>';
     str += '</td><td>';
     str += '<table id=\"tableInDivMember\">';
