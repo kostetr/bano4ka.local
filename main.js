@@ -32,7 +32,10 @@ function showTables() {
         str += '<tr><td colspan=\"2\">' + arrPrize[i] + '</td></tr>';
     }
     alert[oneWin];
-    if (oneWin !== 1 || res.length == 0) {
+    if (oneWin == 1) {
+        str += '<tr><td><input type="button" onclick="onClickPrize()" value="+"></td><td><input type="text" id="prizeId" name="prize"></td></tr>';
+    }
+    if (res.length == 0) {
         str += '<tr><td><input type="button" onclick="onClickPrize()" value="+"></td><td><input type="text" id="prizeId" name="prize"></td></tr>';
     }
 
