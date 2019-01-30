@@ -1,17 +1,22 @@
 var arrPrize = [];
 var arrMember = [];
 var res = [];
-var oneWin;
+var oneWin = 0;
 
 function handleClick(typeGen) {
     if (typeGen.value == 1) {
+        res = [];
+        arrPrize = [];
+        arrMember = [];
         oneWin = 0;
         showTables();
     } else {
+        res = [];
+        arrPrize = [];
+        arrMember = [];
         oneWin = 1;
         showTables();
-    }
-    ;
+    };
 }
 function onClickPrize() {
     var prize = document.getElementById("prizeId").value;
@@ -31,16 +36,12 @@ function showTables() {
     for (i = 0; i < arrPrize.length; i++) {
         str += '<tr><td colspan=\"2\">' + arrPrize[i] + '</td></tr>';
     }
-    alert[oneWin];
-    if (oneWin == 1) {
+    if (res.length == 0 && oneWin == 0) {
         str += '<tr><td><input type="button" onclick="onClickPrize()" value="+"></td><td><input type="text" id="prizeId" name="prize"></td></tr>';
     }
-    if (res.length == 0) {
+    if (res.length == 0 && oneWin == 1 && arrPrize.length == 0) {
         str += '<tr><td><input type="button" onclick="onClickPrize()" value="+"></td><td><input type="text" id="prizeId" name="prize"></td></tr>';
     }
-
-
-
     str += '</table>';
     str += '</td><td>';
     str += '<table id=\"tableInDivMember\">';
@@ -54,15 +55,17 @@ function showTables() {
 
     str += '</table>';
     str += '</td><td>';
-    if (res.length == 0) {
+    if (res.length == 0 && oneWin == 0) {
         str += '<input type="button" onclick="calcArray()" value="Mix">';
-    } else {
+    } else if (oneWin == 1 && res.length==0) {
+        str += '<input type="button" onclick="calcOneWin()" value="Mix">';
+    } else { 
         str += '<table id=\"tableInDivResult\">';
 
-        str += '<tr><td colspan=\"3\">Победители:</td></tr>';
-        str += '<tr><td>Номер</td><td>Приз</td><td>Победитель</td></tr>';
+        str += '<tr><td colspan=\"2\">Победители:</td></tr>';
+        str += '<tr><td>Приз</td><td>Победитель</td></tr>';
         for (i = 0; i < arrPrize.length; i++) {
-            str += '<tr><td>' + (1 + i) + '</td><td>' + arrPrize[i] + '</td><td>' + arrMember[res[i]] + '</td></tr>';
+            str += '<tr><td>' + arrPrize[i] + '</td><td>' + arrMember[res[i]] + '</td></tr>';
         }
         str += '</table>';
     }
@@ -90,7 +93,22 @@ function calcArray() {
             res.push(arr.splice(Math.floor(Math.random() * (arr.length)), 1)[0]);
         }
         showTables();
-        alert(res);
+        
+    }
+}
+function calcOneWin() {
+    if (arrPrize.length < 1) {
+        alert('Необходимо добавить приз');
+        exit();
+    } else if (arrMember.length < 1) {
+        alert('Учасников должно быть больше одного');
+        exit();
+    } else {        
+        var min = 0;
+        var max = arrMember.length;
+        alert(max);
+        res.push(Math.floor(Math.random() * (max - min)) + min);
+        showTables();
     }
 }
 
