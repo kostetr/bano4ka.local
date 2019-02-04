@@ -2,6 +2,7 @@ var arrPrize = [];
 var arrMember = [];
 var res = [];
 var oneWin = 0;
+var date = new Date();
 
 function handleClick(typeGen) {
     if (typeGen.value == 1) {
@@ -16,7 +17,8 @@ function handleClick(typeGen) {
         arrMember = [];
         oneWin = 1;
         showTables();
-    };
+    }
+    ;
 }
 function onClickPrize() {
     var prize = document.getElementById("prizeId").value;
@@ -30,6 +32,7 @@ function onClickMember() {
     showTables();
 }
 function showTables() {
+    var strResultTable;
     var str = '<table id=\"tableInDivConteiner\"><tr><td>';
     str += '<table id=\"tableInDivPrize\">';
     str += '<tr><td colspan=\"2\">Приз</td></tr>';
@@ -57,17 +60,23 @@ function showTables() {
     str += '</td><td>';
     if (res.length == 0 && oneWin == 0) {
         str += '<input type="button" onclick="calcArray()" value="Mix">';
-    } else if (oneWin == 1 && res.length==0) {
+    } else if (oneWin == 1 && res.length == 0) {
         str += '<input type="button" onclick="calcOneWin()" value="Mix">';
-    } else { 
+    } else {
         str += '<table id=\"tableInDivResult\">';
 
         str += '<tr><td colspan=\"2\">Победители:</td></tr>';
+        strResultTable = 'Победители:\r\n';
+        strResultTable += 'Приз - Победитель;\r\n';
+
+
         str += '<tr><td>Приз</td><td>Победитель</td></tr>';
         for (i = 0; i < arrPrize.length; i++) {
             str += '<tr><td>' + arrPrize[i] + '</td><td>' + arrMember[res[i]] + '</td></tr>';
+            strResultTable += arrPrize[i] + ' - ' + arrMember[res[i]] + ';\r\n';
         }
         str += '</table>';
+        saveResult(strResultTable);
     }
 
 
@@ -93,7 +102,7 @@ function calcArray() {
             res.push(arr.splice(Math.floor(Math.random() * (arr.length)), 1)[0]);
         }
         showTables();
-        
+
     }
 }
 function calcOneWin() {
@@ -103,7 +112,7 @@ function calcOneWin() {
     } else if (arrMember.length < 1) {
         alert('Учасников должно быть больше одного');
         exit();
-    } else {        
+    } else {
         var min = 0;
         var max = arrMember.length;
         alert(max);
@@ -111,6 +120,34 @@ function calcOneWin() {
         showTables();
     }
 }
+
+function saveResult(str) {
+    var textToSave = str;
+
+    var hiddenElement = document.createElement('a');
+
+    hiddenElement.href = 'data:attachment/text,' + encodeURI(textToSave);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'Result_' +date.yyyymmddhhmmss()+'.txt';
+    hiddenElement.click();
+}
+
+Date.prototype.yyyymmddhhmmss = function() {
+  var mm = this.getMonth() + 1; // getMonth() is zero-based
+  var dd = this.getDate();
+  var hh = this.getHours();
+  var min = this.getMinutes();
+  var sec = this.getSeconds();
+
+  return [this.getFullYear(),
+          (mm>9 ? '' : '0') + mm,
+          (dd>9 ? '' : '0') + dd,
+          (hh>9 ? '' : '0') + hh,
+          (min>9 ? '' : '0') + min,
+          (sec>9 ? '' : '0') + sec
+         ].join('_');
+};
+
 
 
 
