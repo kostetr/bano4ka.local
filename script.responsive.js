@@ -415,6 +415,45 @@ jQuery(window).bind("responsive", (function ($) {
     };
 })(jQuery));
 
+jQuery(window).bind("responsiveResize", (function ($) {
+    "use strict";
+    return function (event, responsiveDesign) {
+        responsiveAbsBg(responsiveDesign, $("nav.art-nav"), $("#art-hmenu-bg"));
+        $(window).trigger("responsiveNav", { responsiveDesign: responsiveDesign });
+    };
+})(jQuery));
+
+
+
+
+
+
+jQuery(function($) {
+    $('<a href=\"#\" class=\"art-menu-btn\"><span></span><span></span><span></span></a>').insertBefore(".art-hmenu").click(function(e) {
+        var menu = $(this).next();
+        if (menu.is(":visible")) {
+            menu.slideUp("fast", function() {
+                $(this).removeClass("visible").css("display", "");
+            });
+        } else {
+            menu.slideDown("fast", function() {
+                $(this).addClass("visible").css("display", "");
+            });
+        }
+        e.preventDefault();
+    });
+});
+
+jQuery(window).bind("responsiveNav", (function ($) {
+    /*global menuExtendedCreate */
+    "use strict";
+    return function (event, options) {
+        if (options.responsiveDesign.isDesktop && $("li.ext").length > 0) {
+            menuExtendedCreate();
+        }
+    };
+})(jQuery));
+
 var responsiveLayoutCell = (function ($) {
     "use strict";
     return function (responsiveDesign) {

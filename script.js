@@ -406,6 +406,167 @@ jQuery(function($) {
     });
 });
 
+jQuery(function($) {
+    "use strict";
+    $('nav.art-nav').addClass("desktop-nav");
+});
+
+
+jQuery(function ($) {
+    "use strict";
+    if (!browser.ie || browser.version > 7) {
+        return;
+    }
+    $('ul.art-hmenu>li:not(:first-child)').each(function () { $(this).prepend('<span class="art-hmenu-separator"> </span>'); });
+});
+
+jQuery(function ($) {
+    "use strict";
+    $("ul.art-hmenu a:not([href])").attr('href', '#').click(function (e) { e.preventDefault(); });
+});
+
+
+jQuery(function ($) {
+    "use strict";
+    if (!browser.ie || browser.version > 7) {
+        return;
+    }
+
+    /* Fix width of submenu items.
+    * The width of submenu item calculated incorrectly in IE6-7. IE6 has wider items, IE7 display items like stairs.
+    */
+    $.each($("ul.art-hmenu ul"), function () {
+        var maxSubitemWidth = 0;
+        var submenu = $(this);
+        var subitem = null;
+        $.each(submenu.children("li").children("a"), function () {
+            subitem = $(this);
+            var subitemWidth = subitem.outerWidth(false);
+            if (maxSubitemWidth < subitemWidth) {
+                maxSubitemWidth = subitemWidth;
+            }
+        });
+        if (subitem !== null) {
+            var subitemBorderLeft = parseInt(subitem.css("border-left-width"), 10) || 0;
+            var subitemBorderRight = parseInt(subitem.css("border-right-width"), 10) || 0;
+            var subitemPaddingLeft = parseInt(subitem.css("padding-left"), 10) || 0;
+            var subitemPaddingRight = parseInt(subitem.css("padding-right"), 10) || 0;
+            maxSubitemWidth -= subitemBorderLeft + subitemBorderRight + subitemPaddingLeft + subitemPaddingRight;
+            submenu.children("li").children("a").css("width", maxSubitemWidth + "px");
+        }
+    });
+});
+
+jQuery(function ($) {
+    "use strict";
+    var setDirection = function() {
+        setHMenuOpenDirection({
+            container: "div.art-sheet",
+            defaultContainer: "#art-main",
+            menuClass: "art-hmenu",
+            leftToRightClass: "art-hmenu-left-to-right",
+            rightToLeftClass: "art-hmenu-right-to-left"
+        });
+    };
+    if (typeof responsiveDesign !== "undefined") {
+        $(window).on('responsive', setDirection);
+    } else {
+        setDirection();
+    }
+});
+
+var setHMenuOpenDirection = (function ($) {
+    "use strict";
+    return (function(menuInfo) {
+        var defaultContainer = $(menuInfo.defaultContainer);
+        defaultContainer = defaultContainer.length > 0 ? defaultContainer = $(defaultContainer[0]) : null;
+
+        $("ul." + menuInfo.menuClass + ">li>ul").each(function () {
+            var submenu = $(this);
+
+            var submenuWidth = submenu.outerWidth(false);
+            var submenuLeft = submenu.offset().left;
+
+            var mainContainer = submenu.parents(menuInfo.container);
+            mainContainer = mainContainer.length > 0 ? mainContainer = $(mainContainer[0]) : null;
+
+            var container = mainContainer || defaultContainer;
+            if (container !== null) {
+                var containerLeft = container.offset().left;
+                var containerWidth = container.outerWidth(false);
+
+                if (submenuLeft + submenuWidth >= containerLeft + containerWidth) {
+                    /* right to left */
+                    submenu.addClass(menuInfo.rightToLeftClass).find("ul").addClass(menuInfo.rightToLeftClass);
+                } else if (submenuLeft <= containerLeft) {
+                    /* left to right */
+                    submenu.addClass(menuInfo.leftToRightClass).find("ul").addClass(menuInfo.leftToRightClass);
+                }
+            }
+        });
+    });
+})(jQuery);
+
+
+var menuExtendedCreate = (function ($) {
+    "use strict";
+    return function () {
+        var sheet = $(".art-sheet");
+        var sheetLeft = sheet.offset().left;
+        var sheetWidth = sheet.width();
+
+        $(".art-hmenu>li").each(function(i, v) {
+            var itm = $(this);
+            var subm = itm.children("ul");
+            if (subm.length === 0) {
+                return;
+            }
+
+            // reset
+            itm.removeClass("ext ext-r ext-l");
+            itm.css("width", "").find(".ext-off,.ext-m,.ext-l,.ext-r").remove();
+            subm.children("li").children("a").css("width", "");
+
+            var lw = 0, rw = 0;
+        
+            if (typeof subm.attr("data-ext-l") !== "undefined" && typeof subm.attr("data-ext-r") !== "undefined") {
+                lw = parseInt(subm.attr("data-ext-l"), 10) + 0;
+                rw = parseInt(subm.attr("data-ext-r"), 10) + 0;
+                itm.addClass("ext-r").addClass("ext-l");
+            } else {
+                var ltr = !subm.hasClass("art-hmenu-right-to-left");
+                itm.addClass(ltr ? "ext-r" : "ext-l");
+            }
+
+            var shadow = 0;
+            if (subm.length > 0) {
+                var lnk = itm.children("a");
+                var lnkWidth = lnk.outerWidth(false);
+                itm.css("width", Math.round(parseFloat(lnkWidth, 10)) + "px");
+                var menubarMargin = 5 * 2; // margin * 2 sides
+                var menubarBorder = 0 * 2; // border 1 side
+                var submWidth = subm.width() + shadow + menubarMargin + menubarBorder;
+                var w = submWidth - lnkWidth;
+                $("<div class=\"ext-m\"></div>").insertBefore(lnk);
+                if (w < 0) {
+                    var submA = subm.children("li").children("a");
+                    var pL = parseInt(submA.css("padding-left").replace("px", ""), 10) || 0;
+                    var pR = parseInt(submA.css("padding-right").replace("px", ""), 10) || 0;
+                    var bL = parseInt(submA.css("border-left").replace("px", ""), 10) || 0;
+                    var bR = parseInt(submA.css("border-right").replace("px", ""), 10) || 0;
+                    subm.children("li").children("a").css("width", (lnkWidth - pL - pR - bL - bR) + "px");
+                    submWidth = subm.width() + shadow + menubarMargin + menubarBorder;
+                    w = submWidth - lnkWidth;
+                }
+                $("<div class=\"ext-l\" style=\"width: " + (lw > 0 ? lw : Math.round(parseFloat(w, 10))) + "px;\"></div>").insertBefore(lnk);
+                $("<div class=\"ext-r\" style=\"width: " + (rw > 0 ? rw : Math.round(parseFloat(w, 10))) + "px;\"></div>").insertBefore(lnk);
+                itm.addClass("ext");
+            }
+        });
+    };
+})(jQuery);
+jQuery(window).load(menuExtendedCreate);
+
 jQuery(function ($) {
     'use strict';
     $(window).bind('resize', function () {
@@ -1079,52 +1240,36 @@ if (typeof window.resizeData === 'undefined') window.resizeData = {};
 window.resizeData.headerPageWidth = true;
 if (typeof window.defaultResponsiveData === 'undefined') window.defaultResponsiveData = [false, true, true, true, true, ];
 
-resizeData['object0'] = {
-   responsive: [
-                  { left: -0.16, top: 0.88, visible: true }, 
-                  { left: -0.16, top: 0.88, visible: true }, 
-                  { left: -0.16, top: 0.88, visible: true }, 
-                  { left: -0.16, top: 0.88, visible: true }, 
-                  { left: -0.16, top: 0.88, visible: true }, 
-               ],
-   area: {
-       x: 0,
-       y: 0
-   },
-   width: 379,
-   height: 240,
-   autoWidth: false};
-
 resizeData['headline'] = {
    responsive: [
-                  { left: 1, top: 0.44, visible: true }, 
-                  { left: 1, top: 0.44, visible: true }, 
-                  { left: 1, top: 0.44, visible: true }, 
-                  { left: 1, top: 0.44, visible: true }, 
-                  { left: 1, top: 0.44, visible: true }, 
+                  { left: -0.08, top: 0.23, visible: true }, 
+                  { left: -0.08, top: 0.23, visible: true }, 
+                  { left: -0.08, top: 0.23, visible: true }, 
+                  { left: -0.08, top: 0.23, visible: true }, 
+                  { left: -0.08, top: 0.23, visible: true }, 
                ],
    area: {
        x: 0,
        y: 0
    },
-   width: 510,
-   height: 86,
+   width: 462,
+   height: 72,
    autoWidth: true};
 
 resizeData['slogan'] = {
    responsive: [
-                  { left: 0.85, top: 0.7, visible: true }, 
-                  { left: 0.85, top: 0.7, visible: true }, 
-                  { left: 0.85, top: 0.7, visible: true }, 
-                  { left: 0.85, top: 0.7, visible: true }, 
-                  { left: 0.85, top: 0.7, visible: true }, 
+                  { left: 0.1, top: 0.5, visible: true }, 
+                  { left: 0.1, top: 0.5, visible: true }, 
+                  { left: 0.1, top: 0.5, visible: true }, 
+                  { left: 0.1, top: 0.5, visible: true }, 
+                  { left: 0.1, top: 0.5, visible: true }, 
                ],
    area: {
        x: 0,
        y: 0
    },
-   width: 190,
-   height: 16,
+   width: 327,
+   height: 36,
    autoWidth: true};
 
 // used to apply compicated values in style like '!important!
@@ -1372,7 +1517,7 @@ jQuery(function ($) {
     if (!browser.ie || browser.version > 8)
         return;
     processElementMultiplyBg(".art-header", {
-        "bgimage": "url('images/header.jpg')",
+        "bgimage": "url('images/header.png')",
         "bgposition": "center top",
         "images": "",
         "positions": ""
