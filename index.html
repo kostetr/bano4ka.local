@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en-US"><head><!-- Created by Artisteer v4.3.0.60745 -->
+<html dir="ltr" lang="ru-RU"><head><!-- Created by Artisteer v4.3.0.60745 -->
         <meta charset="utf-8">
         <title>Новая страница</title>
         <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
@@ -8,7 +8,9 @@
         <link rel="stylesheet" href="style.css" media="screen">
         <!--[if lte IE 7]><link rel="stylesheet" href="style.ie7.css" media="screen" /><![endif]-->
         <link rel="stylesheet" href="style.responsive.css" media="all">
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
         <script src="main.js"></script>
         <script src="jquery.js"></script>
@@ -44,8 +46,10 @@
 
 
             </header>
-            <nav class="art-nav">
-                <ul class="art-hmenu"><li><a href="index.html" class="active">Home</a></li></ul> 
+            <nav class="art-nav">                
+                 <button class="btn btn-primary navbar-btn " onclick="handleClick(this);" value="1">All Win</button>          
+                 <button class="btn btn-primary navbar-btn" onclick="handleClick(this);" value="2">One Win</button>          
+                 
             </nav>
             <div class="art-sheet clearfix">
                 <div class="art-layout-wrapper">
@@ -57,38 +61,28 @@
                                     <div class="art-postcontent art-postcontent-0 clearfix"><div class="art-content-layout layout-item-0">
                                             <div class="art-content-layout-row">
                                                 <div class="art-layout-cell" style="width: 100%" >
-                                                    <div id="divConteiner"></div>
+                                                    <div id="divConteiner">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div id="prizeDiv" class="col-md-3"></div>
+                                                                <div id="membersDiv" class="col-md-3"></div>
+                                                                <div id="resultDiv" class="col-md-3"></div>
+                                                                <div id="resultDiv" class="col-md-6"></div>
+                                                            </div>                                                          
+                                                        </div>
+                                                    </div>                                                    
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
 
-
                                 </article></div>
-                            <div class="art-layout-cell art-sidebar1"><div class="art-block clearfix">
-                                    <div class="art-blockheader">
-                                        <h3 class="t">Тип розыгрыша:</h3>
-                                    </div>
-                                    <div class="art-blockcontent">
-                                        <form name="typeGenForm">
-                                            <table >
-                                                <tr>
-                                                    <td><input type="radio" id="typeGen1" name="typeGen" onclick="handleClick(this);" value="1"></td>
-                                                    <td><label for="typeGen1">All Win</label><br></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="radio" id="typeGen2" name="typeGen" onclick="handleClick(this);" value="2"></td>
-                                                    <td><label for="typeGen2">One Win</label><br></td>
-                                                </tr>
-                                            </table>       
-                                        </form>
-                                    </div>
-                                </div></div>
+
                         </div>
                     </div>
                 </div><footer class="art-footer">
-                    <p>bano4ka.dp.ua | Авторское право © 2019. Все Права Защищены.</p><p><br></p>
+                    <p>bano4ka.dp | Авторское право © 2019. Все Права Защищены.</p><p><br></p>
                 </footer>
 
             </div>

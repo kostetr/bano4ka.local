@@ -38,30 +38,27 @@ function onClickMember() {
 
 function showTablePrizes() {
     var prizeStr = '<table id=\"tableInDivPrize\">';
-    prizeStr += '<tr><th>Приз:</th></tr>';
+    prizeStr += '<tr><td>Приз</td></tr>';
     for (i = 0; i < arrPrize.length; i++) {
         prizeStr += '<tr><td>' + arrPrize[i] + '</td></tr>';
     }
     if (res.length == 0 && oneWin == 0) {
         prizeStr += '<tr><td><input type="text" id="prizeId" name="prize"><input type="button" onclick="onClickPrize()" value="+"></td></tr>';
-    } else if (res.length == 0 && oneWin == 1 && arrPrize.length == 0) {
+    }
+    if (res.length == 0 && oneWin == 1 && arrPrize.length == 0) {
         prizeStr += '<tr><td><input type="text" id="prizeId" name="prize"><input type="button" onclick="onClickPrize()" value="+"></td></tr>';
-    } else {
-        prizeStr += '<tr><td><input type="text" id="prizeId" name="prize" disabled><input type="button" onclick="onClickPrize()" value="+" disabled></td></tr>';
     }
     prizeStr += '</table>';
     document.getElementById("prizeDiv").innerHTML = prizeStr;
 }
 function showTableMembers() {
     var membersStr = '<table id=\"tableInDivMember\">';
-    membersStr += '<tr><th>Билет:</th><th>Учасник:</th></tr>';
+    membersStr += '<tr><td>Билет</td><td>Учасник</td></tr>';
     for (i = 0; i < arrMember.length; i++) {
         membersStr += '<tr><td>' + (1 + i) + '</td><td>' + arrMember[i] + '</td></tr>';
     }
     if (res.length == 0) {
         membersStr += '<tr><td colspan=\"2\"><input type="text" id="memberId" name="member"><input type="button" onclick="onClickMember()" value="+"></td></tr>';
-    }else {
-        membersStr += '<tr><td colspan=\"2\"><input type="text" id="memberId" name="member" disabled><input type="button" onclick="onClickMember()" value="+" disabled></td></tr>';
     }
 
     membersStr += '</table>';
@@ -77,12 +74,12 @@ function showTableResult() {
     } else {
         resultStr += '<table id=\"tableInDivResult\">';
 
-        resultStr += '<tr><th colspan=\"2\">Результат</th></tr>';
-        strResultTable = 'Результат\r\n';
+        resultStr += '<tr><td colspan=\"2\">Победители:</td></tr>';
+        strResultTable = 'Победители:\r\n';
         strResultTable += 'Приз - Победитель;\r\n';
 
 
-        resultStr += '<tr><th>Приз:</th><th>Победитель:</th></tr>';
+        resultStr += '<tr><td>Приз</td><td>Победитель</td></tr>';
         for (i = 0; i < arrPrize.length; i++) {
             resultStr += '<tr><td>' + arrPrize[i] + '</td><td>' + arrMember[res[i]] + '</td></tr>';
             strResultTable += arrPrize[i] + ' - ' + arrMember[res[i]] + ';\r\n';
