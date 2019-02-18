@@ -499,8 +499,8 @@
 .responsive .responsive-tablet-layout-cell,
 .responsive.responsive-tablet .art-footer .art-content-layout .art-layout-cell 
 {
-   margin: 1%;
-   width: 98% !important;
+   
+   width: 100% !important;
    float: left;
    -webkit-box-sizing: border-box;
    -moz-box-sizing: border-box;

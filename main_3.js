@@ -61,29 +61,31 @@ function showMassage(massage, type = 0) {
 
 
 function showTablePrizes() {
-    var prizeStr = '<ul class="list-group"><a href="#" class="list-group-item list-group-item-action list-group-item-dark">Билет(ы):</a>';
+    var prizeStr = '<table id=\"tableInDivPrize\">';
+    prizeStr += '<tr><th>Приз:</th></tr>';
     for (i = 0; i < arrPrize.length; i++) {
-        prizeStr += '<li class="list-group-item d-flex justify-content-between align-items-center">' + arrPrize[i] + '</li>';
+        prizeStr += '<tr><td>' + arrPrize[i] + '</td></tr>';
     }
     if (res.length == 0 && oneWin == 0) {
-        prizeStr += '<li class="list-group-item d-flex justify-content-between align-items-center"><input type="text" id="prizeId" name="prize"><input type="button" onclick="onClickPrize()" value="+"></li>';
+        prizeStr += '<tr><td><input type="text" id="prizeId" name="prize"><input type="button" onclick="onClickPrize()" value="+"></td></tr>';
     } else if (res.length == 0 && oneWin == 1 && arrPrize.length == 0) {
-        prizeStr += '<li class="list-group-item d-flex justify-content-between align-items-center"><input type="text" id="prizeId" name="prize"><input type="button" onclick="onClickPrize()" value="+"></li>';
+        prizeStr += '<tr><td><input type="text" id="prizeId" name="prize"><input type="button" onclick="onClickPrize()" value="+"></td></tr>';
     } else {
-        prizeStr += '<li class="list-group-item d-flex justify-content-between align-items-center"><input type="text" id="prizeId" name="prize" disabled><input type="button" onclick="onClickPrize()" value="+" disabled></li>';
+        prizeStr += '<tr><td><input type="text" id="prizeId" name="prize" disabled><input type="button" onclick="onClickPrize()" value="+" disabled></td></tr>';
     }
-    prizeStr += '</ul>';
+    prizeStr += '</table>';
     document.getElementById("prizeDiv").innerHTML = prizeStr;
 }
 function showTableMembers() {
-    var membersStr = '<ul class="list-group"><a href="#" class="list-group-item list-group-item-action list-group-item-dark">Учасник(и):</a>';
+    var membersStr = '<table id=\"tableInDivMember\">';
+    membersStr += '<tr><th>Билет:</th><th>Учасник:</th></tr>';
     for (i = 0; i < arrMember.length; i++) {
-        membersStr += '<li class="list-group-item d-flex justify-content-between align-items-center">' + (1 + i) + '   -   ' + arrMember[i] + '</li>';
+        membersStr += '<tr><td>' + (1 + i) + '</td><td>' + arrMember[i] + '</td></tr>';
     }
     if (res.length == 0) {
-        membersStr += '<li class="list-group-item d-flex justify-content-between align-items-center"><input type="text" id="memberId" name="prize"><input type="button" onclick="onClickMember()" value="+"></li>';
+        membersStr += '<tr><td colspan=\"2\"><input type="text" id="memberId" name="member"><input type="button" onclick="onClickMember()" value="+"></td></tr>';
     } else {
-        membersStr += '<li class="list-group-item d-flex justify-content-between align-items-center" disabled><input type="text" id="memberId" name="prize"><input type="button" onclick="onClickMember()" value="+"disabled></li>';
+        membersStr += '<tr><td colspan=\"2\"><input type="text" id="memberId" name="member" disabled><input type="button" onclick="onClickMember()" value="+" disabled></td></tr>';
     }
 
     membersStr += '</table>';
@@ -124,7 +126,7 @@ function calcArray() {
     if (arrPrize.length < 1) {
         showMassage('Необходимо добавить приз');
         exit();
-    } else if (arrPrize.length > arrMember.length) {
+    }else if (arrPrize.length > arrMember.length) {
         showMassage('Призов больше чем учасников');
         exit();
     } else if (arrPrize.length < arrMember.length) {
