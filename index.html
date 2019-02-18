@@ -24,69 +24,62 @@
         <style>.art-content .art-postcontent-0 .layout-item-0 { border-spacing: 3px 0px; border-collapse: separate;  }
             .ie7 .art-post .art-layout-cell {border:none !important; padding:0 !important; }
             .ie6 .art-post .art-layout-cell {border:none !important; padding:0 !important; }
+            .leftsidebar {
+                float: left;
+                width: 200px;
+                margin-top: 50px;
+            }
+
+            .content {
+                float: left;
+                width: 300px;
+                margin-top: 50px;
+            }
+
+            .right {
+                float:left;
+                width: 300px;
+                margin-top: 50px;
+            }
+
+            .clearer {
+                clear: both;
+                margin-top: 50px;
+            }
 
         </style></head>
     <body>
         <div id="art-main">
             <header class="art-header">
-
-                <div class="art-shapes">
-
-                </div>
-
+                <div class="art-shapes"></div>
                 <h1 class="art-headline">
                     <a href="/">@Bano4ka.dp</a>
                 </h1>
                 <h2 class="art-slogan">Баночка в Подарок</h2>
-
-
-
-
-
-
-
             </header>
             <nav class="art-nav">                
-                 <button class="btn btn-dark navbar-btn " onclick="handleClick(this);" value="1">All Win</button>          
-                 <button class="btn btn-dark navbar-btn" onclick="handleClick(this);" value="2">One Win</button>          
-                 
+                <button class="btn btn-dark navbar-btn " onclick="handleClick(this);" value="1">All Win</button>          
+                <button class="btn btn-dark navbar-btn" onclick="handleClick(this);" value="2">One Win</button>
             </nav>
             <div class="art-sheet clearfix">
-                <div class="art-layout-wrapper">
-                    <div class="art-content-layout">
-                        <div class="art-content-layout-row">
-                            <div class="art-layout-cell art-content"><article class="art-post art-article">
-
-
-                                    <div class="art-postcontent art-postcontent-0 clearfix"><div class="art-content-layout layout-item-0">
-                                            <div class="art-content-layout-row">
-                                                <div class="art-layout-cell" style="width: 100%" >
-                                                    <div id="divConteiner">
-                                                        <div class="container">
-                                                            <div class="row">
-                                                                <div id="prizeDiv" class="col-md-3"></div>
-                                                                <div id="membersDiv" class="col-md-3"></div>
-                                                                <div id="resultDiv" class="col-md-3"></div>
-                                                                <div id="resultDiv" class="col-md-6"></div>
-                                                            </div>                                                          
-                                                        </div>
-                                                    </div>                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                </article></div>
-
+                <div class="art-layout-wrapper" style="width: 100%">   
+                    <div class="art-layout-cell art-content">
+                        <div class="art-layout-cell" style="width: 100%" >
+                            <div id="divConteiner">    
+                                
+                                <div>Ошибки</div>
+                                <div>заглав</div>
+                                <div id="prizeDiv" class="leftsidebar"></div>
+                                <div id="membersDiv" class="content"></div>
+                                <div id="resultDiv" class="right"></div>
+                                <div id="resultDiv" class="clearer"></div>
+                            </div>                                                    
                         </div>
                     </div>
-                </div><footer class="art-footer">
+                </div>
+                <footer class="art-footer">
                     <p>bano4ka.dp | Авторское право © 2019. Все Права Защищены.</p><p><br></p>
                 </footer>
-
             </div>
         </div>
-
-
     </body></html>
