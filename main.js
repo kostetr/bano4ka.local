@@ -103,9 +103,9 @@ function showTableResult() {
     var strResultInFile;
     var resultStr = '<ul class="list-group"><a href="#" class="list-group-item list-group-item-action list-group-item-dark">Результаты:</a>';
     if (res.length == 0 && oneWin == 0) {
-        resultStr += '<li class="list-group-item d-flex justify-content-between align-items-center"><input type="button" class="btn btn-secondary btn-block" onclick="calcArray()" value="Mix"></li>';
+        resultStr += '<li class="list-group-item d-flex justify-content-between align-items-center"><input type="button" class="btn btn-secondary btn-block" onclick="calcArray()" value="Разыграть"></li>';
     } else if (oneWin == 1 && res.length == 0) {
-        resultStr += '<li class="list-group-item d-flex justify-content-between align-items-center"><input type="button" class="btn btn-secondary btn-block" onclick="calcOneWin()" value="Mix"></li>';
+        resultStr += '<li class="list-group-item d-flex justify-content-between align-items-center"><input type="button" class="btn btn-secondary btn-block" onclick="calcOneWin()" value="Разыграть"></li>';
     } else {
         strResultInFile = 'Результат\r\n';
         strResultInFile += 'Приз - Победитель;\r\n';

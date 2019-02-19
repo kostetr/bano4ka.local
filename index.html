@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="ru-RU"><head><!-- Created by Artisteer v4.3.0.60745 -->
         <meta charset="utf-8">
-        <title>Новая страница</title>
+        <title>Розыгрыш призов.</title>
         <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
 
         <!--[if lt IE 9]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -16,8 +16,8 @@
         <script src="jquery.js"></script>
         <script src="script.js"></script>
 
-        <meta name="description" content="Description">
-        <meta name="keywords" content="Keywords">
+        <meta name="description" content="Розыгрыши подарков от Bano4ka.dp">
+        <meta name="keywords" content="Розыгрыш, Bano4ka.dp, подарок, приз">
 
 
 
@@ -25,8 +25,17 @@
             #divTitle, #divMassage {
                 text-align: center;
                 margin-bottom: 10px;
+
             }
-            ul>a {
+            .left-align {
+                text-align: left;
+            }
+            p {
+                font-family: Verdana, Arial, Helvetica, sans-serif; 
+                font-size: 12pt; /* Размер шрифта в пунктах */ 
+            }
+
+            ul>a, .font-weight-bold {
                 font-weight:bold;
             }
             li>input {
@@ -75,8 +84,12 @@
                     <div id="divMassage">  </div>
                     <div id="divConteiner">
                         <div id="divTitle">
-                            <p>Чтобы выиграть в лотерее нужно иметь не только удачу, но и лотерейный билет.</br></p>
-                            <p>Сервис для розыгрыша лотереи. Создан для проекта <a href="https://www.instagram.com/bano4ka.dp/" target="_blank">@Bano4ka.dp</a>, но и Вы можете им воспользоватся.</p>
+                            <p class="left-align">Чтобы выиграть в лотерее нужно иметь не только удачу, но и лотерейный билет.</br></p>
+                            <p class="left-align">Сервис для розыгрыша лотереи. Создан для проекта <a href="https://www.instagram.com/bano4ka.dp/" target="_blank">@Bano4ka.dp</a>, но и Вы можете им воспользоватся.</p>
+                            <p class="font-weight-bold">Сервис делится на два вида розыгрышей призов:</p>
+                            <p class="left-align"><span class="font-weight-bold">All Win</span> - в этой части сервиса нет проигравших, все получат обещаную награду. Заполняя формы помните количество призов должно совпадать с количеством учасников. Призы разыгрываются случайным образом.</p>
+                            <p class="left-align"><span class="font-weight-bold">One Win</span> - название говорит само за себя, в этой части сервиса победителем будет один человек и выбор его осуществляется случайным образом.</p>
+                            <p class="left-align"><span class="font-weight-bold">P.S.</span> Условия розыгрышей могут менятся.</p>
                         </div>
                         <div id="prizeDiv" class="leftsidebar"></div>
                         <div id="membersDiv" class="content"></div>
